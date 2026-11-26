@@ -1,0 +1,33 @@
+name: Android64 Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build Sunrise (Android64)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Geode mod
+        uses: geode-sdk/build-geode-mod@main
+        with:
+          target: Android64
+          sdk: given
+          build-config: Release
+
+      - name: Upload Geode package
+        uses: actions/upload-artifact@v4
+        with:
+          name: Sunrise-Android64
+          path: build-android64/*.geode
+          if-no-files-found: error
