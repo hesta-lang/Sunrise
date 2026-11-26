@@ -18,6 +18,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Render Geode logo
+        run: |
+          python3 -m pip install cairosvg
+          python3 tools/render_logo.py
+
       - name: Build Geode mod
         uses: geode-sdk/build-geode-mod@main
         with:

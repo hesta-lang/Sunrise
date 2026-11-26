@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1536" viewBox="0 0 1536 1536">
+  <defs>
+    <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFD42B"/>
+      <stop offset="1" stop-color="#FF9B32"/>
+    </linearGradient>
+    <linearGradient id="horizon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFA52F"/>
+      <stop offset="1" stop-color="#FF684B"/>
+    </linearGradient>
+  </defs>
+  <rect width="1536" height="1536" fill="#1B1B1B"/>
+  <g fill="#FFD12A">
+    <rect x="598" y="329" width="50" height="123" rx="14"/>
+    <rect x="279" y="432" width="50" height="123" rx="14" transform="rotate(-42 304 493.5)"/>
+    <rect x="887" y="432" width="50" height="123" rx="14" transform="rotate(42 912 493.5)"/>
+  </g>
+  <path d="M357 734 A268 268 0 0 1 893 734 Z" fill="url(#sun)"/>
+  <g fill="url(#horizon)">
+    <rect x="248" y="734" width="752" height="30" rx="15"/>
+    <rect x="337" y="798" width="572" height="32" rx="16"/>
+    <rect x="442" y="868" width="365" height="32" rx="16"/>
+  </g>
+</svg>
