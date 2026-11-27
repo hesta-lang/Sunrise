@@ -337,7 +337,6 @@ protected:
         // Delete every page container immediately, then animate only the
         // newly selected page into the empty content area.
         m_pageContent = nullptr;
-        m_outgoingPage = nullptr;
         m_labDemo = nullptr;
         m_labModeLabel = nullptr;
         m_motionButtons.fill(nullptr);
