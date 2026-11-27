@@ -1,16 +1,19 @@
 {
-    "geode": "6.0.0",
-    "gd": {
-        "android": "2.2091"
-    },
-    "id": "hesta.sunrise",
-    "name": "Sunrise",
-    "version": "v0.1.0-alpha",
-    "developer": "hesta-lang",
-    "description": "A modular floating mod menu for Geometry Dash.",
-    "resources": {
-        "sprites": [
-            "resources/sunrise-button.png"
-        ]
-    }
+  "geode": "6.0.0",
+  "gd": {
+    "android": "2.2091"
+  },
+  "id": "hesta.sunrise",
+  "name": "Sunrise",
+  "version": "v0.1.0-alpha",
+  "developer": "hesta-lang",
+  "description": "A modular floating mod menu for Geometry Dash.",
+  "resources": {
+    "sprites": [
+      "resources/sunrise-button.png"
+    ],
+    "files": [
+      "resources/sunrise-button.png"
+    ]
+  }
 }
