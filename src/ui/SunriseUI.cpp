@@ -386,7 +386,7 @@ protected:
             destination.y
         });
 
-        CCFiniteTimeAction* visualAction = nullptr;
+        CCActionInterval* visualAction = nullptr;
         if (m_transitionMode == static_cast<int>(TransitionMode::Zoom)) {
             visualAction = CCSpawn::create(
                 CCScaleTo::create(duration, 1.f),
@@ -423,7 +423,7 @@ protected:
             distance = 0.f;
         }
 
-        CCFiniteTimeAction* visualAction = nullptr;
+        CCActionInterval* visualAction = nullptr;
         if (m_transitionMode == static_cast<int>(TransitionMode::Zoom)) {
             visualAction = CCSpawn::create(
                 CCScaleTo::create(duration, 0.96f),
@@ -525,7 +525,7 @@ protected:
             m_labDemo->setPosition({targetX - distance, targetY});
         }
 
-        CCFiniteTimeAction* visualAction = nullptr;
+        CCActionInterval* visualAction = nullptr;
         if (m_transitionMode == static_cast<int>(TransitionMode::Zoom)) {
             visualAction = CCSpawn::create(
                 CCScaleTo::create(duration, 1.f),
@@ -758,8 +758,8 @@ class $modify(SunriseMenuLayer, MenuLayer) {
 };
 
 class $modify(SunrisePlayLayer, PlayLayer) {
-    bool init(GJGameLevel* level, bool useReplay, bool dontCreateObjects) {
-        if (!PlayLayer::init(level, useReplay, dontCreateObjects)) {
+    bool init(GJGameLevel* level, bool dontCreateObjects) {
+        if (!PlayLayer::init(level, dontCreateObjects)) {
             return false;
         }
 
