@@ -40,7 +40,7 @@ constexpr std::array<const char*, 4> kTransitionNames = {
 };
 
 constexpr std::array<float, 6> kTabPositions = {
-    -160.f, -96.f, -32.f, 32.f, 96.f, 160.f
+    -170.f, -102.f, -34.f, 34.f, 102.f, 170.f
 };
 
 constexpr float kPageWidth = 394.f;
@@ -101,8 +101,8 @@ protected:
                 continue;
             }
 
-            offSprite->setScale(0.72f);
-            onSprite->setScale(0.72f);
+            offSprite->setScale(0.58f);
+            onSprite->setScale(0.58f);
 
             auto tab = CCMenuItemToggler::create(
                 offSprite,
@@ -333,29 +333,19 @@ protected:
             }
         }
 
-        // Remove an older outgoing page before starting a new transition.
-        if (m_outgoingPage) {
-            m_outgoingPage->stopAllActions();
-            m_outgoingPage->removeFromParentAndCleanup(true);
-            m_outgoingPage = nullptr;
-        }
+        // A category must never remain visible behind the next one.
+        // Delete every page container immediately, then animate only the
+        // newly selected page into the empty content area.
+        m_pageContent = nullptr;
+        m_outgoingPage = nullptr;
+        m_labDemo = nullptr;
+        m_labModeLabel = nullptr;
+        m_motionButtons.fill(nullptr);
+        m_mainLayer->removeChildByTag(kPageTag, true);
 
-        auto oldPage = m_pageContent;
         m_pageContent = nextPage;
-        if (selected != 5) {
-            m_labDemo = nullptr;
-            m_labModeLabel = nullptr;
-            m_motionButtons.fill(nullptr);
-        }
-
         m_mainLayer->addChild(nextPage, 3);
         this->animatePageIn(nextPage, direction);
-
-        if (oldPage) {
-            oldPage->stopAllActions();
-            m_outgoingPage = oldPage;
-            this->animatePageOut(oldPage, direction);
-        }
     }
 
     void animatePageIn(CCLayerColor* page, int direction) {
@@ -402,66 +392,6 @@ protected:
         }
 
         page->runAction(CCEaseSineOut::create(visualAction));
-    }
-
-    void animatePageOut(CCLayerColor* page, int direction) {
-        if (!page) {
-            return;
-        }
-
-        float duration = 0.14f;
-        float distance = 14.f;
-
-        if (m_transitionMode == static_cast<int>(TransitionMode::Slide)) {
-            duration = 0.20f;
-            distance = 34.f;
-        } else if (m_transitionMode == static_cast<int>(TransitionMode::Fade)) {
-            duration = 0.16f;
-            distance = 0.f;
-        } else if (m_transitionMode == static_cast<int>(TransitionMode::Zoom)) {
-            duration = 0.18f;
-            distance = 0.f;
-        }
-
-        CCActionInterval* visualAction = nullptr;
-        if (m_transitionMode == static_cast<int>(TransitionMode::Zoom)) {
-            visualAction = CCSpawn::create(
-                CCScaleTo::create(duration, 0.96f),
-                CCFadeTo::create(duration, 0),
-                nullptr
-            );
-        } else {
-            visualAction = CCSpawn::create(
-                CCMoveBy::create(
-                    duration,
-                    ccp(static_cast<float>(direction) * -distance, 0.f)
-                ),
-                CCFadeTo::create(duration, 0),
-                nullptr
-            );
-        }
-
-        auto remove = CCCallFuncN::create(
-            this,
-            callfuncN_selector(SunrisePopup::removeOutgoingPage)
-        );
-        page->runAction(CCSequence::create(
-            CCEaseSineIn::create(visualAction),
-            remove,
-            nullptr
-        ));
-    }
-
-    void removeOutgoingPage(CCNode* node) {
-        if (!node) {
-            return;
-        }
-        if (node == m_outgoingPage) {
-            m_outgoingPage = nullptr;
-        }
-        if (node != m_pageContent && node->getParent()) {
-            node->removeFromParentAndCleanup(true);
-        }
     }
 
     void onMotionLabMode(CCObject* sender) {
@@ -567,7 +497,6 @@ private:
     int m_transitionMode = static_cast<int>(TransitionMode::Horizon);
     CCMenu* m_tabsMenu = nullptr;
     CCLayerColor* m_pageContent = nullptr;
-    CCLayerColor* m_outgoingPage = nullptr;
     CCLayerColor* m_labDemo = nullptr;
     CCLabelBMFont* m_labModeLabel = nullptr;
     std::array<CCMenuItemToggler*, 6> m_tabs{};
@@ -624,7 +553,7 @@ public:
             return false;
         }
 
-        m_background->setScale(0.62f);
+        m_background->setScale(1.05f);
         m_background->setOpacity(225);
         m_background->setPosition(
             inGame
@@ -652,10 +581,10 @@ public:
 
         auto point = this->convertToNodeSpace(touch->getLocation());
         auto bounds = m_background->boundingBox();
-        bounds.origin.x -= 12.f;
-        bounds.origin.y -= 12.f;
-        bounds.size.width += 24.f;
-        bounds.size.height += 24.f;
+        bounds.origin.x -= 18.f;
+        bounds.origin.y -= 18.f;
+        bounds.size.width += 36.f;
+        bounds.size.height += 36.f;
         if (!bounds.containsPoint(point)) {
             return false;
         }
