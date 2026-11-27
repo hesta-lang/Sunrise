@@ -1,7 +1,7 @@
 # Sunrise
 
 <p align="center">
-  <img src="logo.svg" alt="Sunrise logo" width="320">
+  <img src="logo.jpg" alt="Sunrise original cover" width="320">
 </p>
 
 <p align="center">A modular floating mod menu for Geometry Dash.</p>
@@ -17,7 +17,7 @@ Sunrise brings gameplay tools, player options, visual controls, quality-of-life 
 
 ## Build
 
-Sunrise uses the Geode SDK and CMake. The Android64 package is built through GitHub Actions. The workflow renders the vector logo into the `logo.png` asset that Geode displays in its mod interface.
+Sunrise uses the Geode SDK and CMake. The Android64 package is built through GitHub Actions. The workflow converts the original cover image into `logo.png` for Geode without resizing or cropping it.
 
 ## Development
 
