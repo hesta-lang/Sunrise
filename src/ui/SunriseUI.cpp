@@ -112,8 +112,8 @@ protected:
         return true;
     }
 
-    CCNode* createPage(int pageIndex) {
-        auto root = CCNode::create();
+    CCLayer* createPage(int pageIndex) {
+        auto root = CCLayer::create();
         if (!root) {
             return nullptr;
         }
@@ -313,7 +313,7 @@ private:
     int m_activeTab = 0;
     CCMenu* m_tabsMenu = nullptr;
     CCLayerColor* m_tabIndicator = nullptr;
-    CCNode* m_pageContent = nullptr;
+    CCLayer* m_pageContent = nullptr;
     std::array<TabButton*, 5> m_tabs{};
 };
 
