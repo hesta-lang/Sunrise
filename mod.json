@@ -7,5 +7,10 @@
     "name": "Sunrise",
     "version": "v0.1.0-alpha",
     "developer": "hesta-lang",
-    "description": "A modular floating mod menu for Geometry Dash."
+    "description": "A modular floating mod menu for Geometry Dash.",
+    "resources": {
+        "sprites": [
+            "resources/sunrise-button.png"
+        ]
+    }
 }
